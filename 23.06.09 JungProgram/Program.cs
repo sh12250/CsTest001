@@ -33,7 +33,7 @@ namespace _23._06._09_JungProgram
             patterns[3] = "♠";
 
             // 숫자 초기화
-            for(int x = 0; x < cards.GetLength(0); x++)
+            for (int x = 0; x < cards.GetLength(0); x++)
             {
                 cards[x] = x + 1;
             }
@@ -60,13 +60,13 @@ namespace _23._06._09_JungProgram
                 int betOn = 1;
                 string userInput = "0";
 
-                if(scoreNow == 0)
+                if (scoreNow == 0)
                 {   // 게임 패배
                     Console.WriteLine("당신은 가진 칩을 모두 사용했습니다");
                     Console.WriteLine("돈 내기는 적당히 하세요 ^^");
                     break;
                 }
-                else if(scoreNow >= 300)
+                else if (scoreNow >= 300)
                 {   // 게임 승리?
                     Console.WriteLine("당신은 검은 양복의 남자들에게 끌려갔습니다");
                     Console.WriteLine("돈 내기는 적당히 하세요 ^^");
@@ -92,12 +92,23 @@ namespace _23._06._09_JungProgram
                 // 칩, 판돈, 베팅 여부 출력
                 scoreNow -= betOn;
                 Console.WriteLine("칩 : {0}  판돈 : {1}", scoreNow, betOn);
-                Console.WriteLine("베팅할까?");
-                Console.WriteLine("1. YES  2. NO");
 
-                // 플레이어의 선택
-                userInput = Console.ReadLine();
-                Console.Clear();
+                if (scoreNow != 0)
+                {
+                    Console.WriteLine("베팅할까?");
+                    Console.WriteLine("1. YES  2. NO");
+
+                    // 플레이어의 선택
+                    userInput = Console.ReadLine();
+                    Console.Clear();
+                }
+                else if (scoreNow == 0)
+                {
+                    userInput = "1";
+                    Console.WriteLine("카드는 까봐야지...");
+                    Console.ReadLine();
+                    Console.Clear();
+                }
 
                 // 선택 결과
                 if (userInput == "1")
@@ -105,42 +116,53 @@ namespace _23._06._09_JungProgram
                     userInput = "0";
 
                     PrintComCard(theComCard1, theComCard2);
-                    Console.WriteLine("얼마나 베팅하지?");
 
-                    // 숫자 받아주기
-                    userInput = Console.ReadLine();
-                    int.TryParse(userInput, out betOn);
+                    if (scoreNow != 0)
+                    {
+                        Console.WriteLine("얼마나 베팅하지?");
 
-                    // 베팅 진행
-                    if (betOn == 0 || betOn == 10)
-                    {   // 이상한 거 적으면 기본 베팅
-                        betOn = 10;
-                        scoreNow -= betOn;
-                        Console.WriteLine("기본으로 베팅하겠습니다");
-                        Console.WriteLine("칩을 {0}개 베팅했다", betOn);
-                        Task.Delay(1000).Wait();
-                        Console.Write("드로우!");
-                        Console.ReadLine();
-                        Console.Clear();
-                    }
-                    else if(betOn >= scoreNow)
-                    {   // 현재 점수보다 높으면 올인
-                        betOn = scoreNow;
-                        scoreNow = 0;
-                        Console.WriteLine("올인!!!", betOn);
-                        Console.WriteLine("가진 칩을 모두 베팅했다");
+                        // 숫자 받아주기
+                        userInput = Console.ReadLine();
+                        int.TryParse(userInput, out betOn);
+
+                        // 베팅 진행
+                        if (betOn == 0 || betOn == 10)
+                        {   // 이상한 거 적으면 기본 베팅
+                            betOn = 10;
+                            scoreNow -= betOn;
+                            Console.WriteLine("기본으로 베팅하겠습니다");
+                            Console.WriteLine("칩을 {0}개 베팅했다", betOn);
+                            Task.Delay(1000).Wait();
+                            Console.Write("드로우!");
+                            Console.ReadLine();
+                            Console.Clear();
+                        }
+                        else if (betOn >= scoreNow)
+                        {   // 현재 점수보다 높으면 올인
+                            betOn = scoreNow;
+                            scoreNow = 0;
+                            Console.WriteLine("올인!!!", betOn);
+                            Console.WriteLine("가진 칩을 모두 베팅했다");
+                            Task.Delay(1000).Wait();
+                            Console.Write("제발제발제발제발");
+                            Console.ReadLine();
+                            Console.Clear();
+                        }
+                        else
+                        {   // 숫자 적으면 그대로 베팅
+                            scoreNow -= betOn;
+                            Console.WriteLine("{0}개 베팅하겠습니다", betOn);
+                            Console.WriteLine("칩을 {0}개 베팅했다", betOn);
+                            Task.Delay(1000).Wait();
+                            Console.Write("드로우!");
+                            Console.ReadLine();
+                            Console.Clear();
+                        }
+                    }           // if(scoreNow != 0)
+                    else if (scoreNow == 0)
+                    {
                         Task.Delay(1000).Wait();
                         Console.Write("제발제발제발제발");
-                        Console.ReadLine();
-                        Console.Clear();
-                    }
-                    else
-                    {   // 숫자 적으면 그대로 베팅
-                        scoreNow -= betOn;
-                        Console.WriteLine("{0}개 베팅하겠습니다", betOn);
-                        Console.WriteLine("칩을 {0}개 베팅했다", betOn);
-                        Task.Delay(1000).Wait();
-                        Console.Write("드로우!");
                         Console.ReadLine();
                         Console.Clear();
                     }
@@ -163,7 +185,7 @@ namespace _23._06._09_JungProgram
                     // 승리 패배 조건
                     if (comCard[1] > comCard[3])
                     {
-                        if(myCard[1] < comCard[1] && myCard[1] > comCard[3])
+                        if (myCard[1] < comCard[1] && myCard[1] > comCard[3])
                         {   // 승리
                             scoreNow += betOn * 2;
                             Console.WriteLine("내기에서 이겼습니다");
@@ -193,7 +215,7 @@ namespace _23._06._09_JungProgram
                             Console.WriteLine("칩 : {0}", scoreNow);
                             Console.ReadLine();
                             Console.Clear();
-                         
+
                         }
                         else
                         {   // 패배
@@ -207,7 +229,7 @@ namespace _23._06._09_JungProgram
 
 
                 }       // if(userInput == "1")
-                else if(userInput == "2")
+                else if (userInput == "2")
                 {
                     PrintComCard(theComCard1, theComCard2);
                     Console.WriteLine("죽었습니다");
@@ -224,13 +246,16 @@ namespace _23._06._09_JungProgram
                     Console.Clear();
                 }
 
-                if (scoreNow != 0)
+                if (scoreNow > 0 && scoreNow < 300)
                 {
                     Console.WriteLine("다음 게임");
                     Task.Delay(1000).Wait();
                     Console.Clear();
                 }
             }                                       // while()
+
+            Task.Delay(2000).Wait();
+            Console.Clear();
         }                                       // main()
 
         // 함수 기능은 이름의 직역이다
@@ -339,7 +364,7 @@ namespace _23._06._09_JungProgram
             Random random = new Random();
             int randIdx1, randIdx2 = 0;
 
-            for(int  i = 0; i < 300; i++)
+            for (int i = 0; i < 300; i++)
             {
                 randIdx1 = random.Next(startNum, intArr.Length);
                 randIdx2 = random.Next(startNum, intArr.Length);
@@ -348,7 +373,7 @@ namespace _23._06._09_JungProgram
             }
         }
 
-        static void Swap(int[] intArr, int firstIdx, int SecondIdx) 
+        static void Swap(int[] intArr, int firstIdx, int SecondIdx)
         {
             int temp = 0;
 
