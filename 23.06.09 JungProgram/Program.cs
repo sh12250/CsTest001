@@ -52,6 +52,7 @@ namespace _23._06._09_JungProgram
             // 처음에만 출력
             Console.WriteLine("첫 게임");
             Task.Delay(1000).Wait();
+            Console.Clear();
 
             // 실제 플레이
             while (true)
@@ -227,6 +228,7 @@ namespace _23._06._09_JungProgram
                 {
                     Console.WriteLine("다음 게임");
                     Task.Delay(1000).Wait();
+                    Console.Clear();
                 }
             }                                       // while()
         }                                       // main()
