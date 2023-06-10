@@ -47,12 +47,11 @@ namespace _23._06._09_JungProgram
             string[] theComCard2 = new string[7];
             string[] theMyCard = new string[7];
 
+
+
             // 처음에만 출력
             Console.WriteLine("첫 게임");
             Task.Delay(1000).Wait();
-            Console.Write("드로우!");
-            Console.ReadLine();
-            Console.Clear();
 
             // 실제 플레이
             while (true)
@@ -228,9 +227,6 @@ namespace _23._06._09_JungProgram
                 {
                     Console.WriteLine("다음 게임");
                     Task.Delay(1000).Wait();
-                    Console.Write("드로우!");
-                    Console.ReadLine();
-                    Console.Clear();
                 }
             }                                       // while()
         }                                       // main()
