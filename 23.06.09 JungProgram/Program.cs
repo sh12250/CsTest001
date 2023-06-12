@@ -81,6 +81,17 @@ namespace _23._06._09_JungProgram
                 comCard[2] = cards[1] / 13;
                 comCard[3] = cards[1] % 13 + 1;
 
+                if(cards[0] / 13 == 4)
+                {
+                    comCard[0]--;
+                }
+
+                if(cards[1] / 13 == 4)
+                {
+                    comCard[2]--;
+                }
+
+
                 // 컴카드 출력
                 theComCard1 = MakeCard(patterns[comCard[0]], comCard[1]);
                 theComCard2 = MakeCard(patterns[comCard[2]], comCard[3]);
@@ -235,6 +246,7 @@ namespace _23._06._09_JungProgram
                     Console.WriteLine("죽었습니다");
                     Task.Delay(1000).Wait();
                     Console.WriteLine("칩 : {0}", scoreNow);
+                    Console.ReadLine();
                     Console.Clear();
                 }
                 else
@@ -243,6 +255,7 @@ namespace _23._06._09_JungProgram
                     Console.WriteLine("죽은 걸로 치겠습니다");
                     Task.Delay(1000).Wait();
                     Console.WriteLine("칩 : {0}", scoreNow);
+                    Console.ReadLine();
                     Console.Clear();
                 }
 
