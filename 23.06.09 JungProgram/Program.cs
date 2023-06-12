@@ -76,21 +76,10 @@ namespace _23._06._09_JungProgram
                 // 카드 셔플
                 ShuffleCard(0, cards);
                 // 컴카드, 0,2에는 문양을 1,3에는 숫자를 세팅
-                comCard[0] = cards[0] / 13;
+                comCard[0] = (cards[0] - 1) / 13;
                 comCard[1] = cards[0] % 13 + 1;
-                comCard[2] = cards[1] / 13;
+                comCard[2] = (cards[1] - 1) / 13;
                 comCard[3] = cards[1] % 13 + 1;
-
-                if(cards[0] / 13 == 4)
-                {
-                    comCard[0]--;
-                }
-
-                if(cards[1] / 13 == 4)
-                {
-                    comCard[2]--;
-                }
-
 
                 // 컴카드 출력
                 theComCard1 = MakeCard(patterns[comCard[0]], comCard[1]);
