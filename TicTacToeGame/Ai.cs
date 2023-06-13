@@ -8,7 +8,6 @@ namespace TicTacToeGame
 {
     public class Ai : Board
     {
-
         public void AiSelect(string[,] board)
         {
             Random random = new Random();

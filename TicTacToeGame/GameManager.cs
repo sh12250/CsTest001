@@ -100,5 +100,30 @@ namespace TicTacToeGame
 
             return false;
         }               // CheckAiWin()
+
+        public bool CheckBoardFull(string[,] board)
+        {
+            int boardFilled = 0;
+
+            for(int y = 0; y < board.GetLength(0); y++)
+            {
+                for(int x = 0; x < board.GetLength(1); x++)
+                {
+                    if (board[y, x] != "  ")
+                    {
+                        boardFilled++;
+                    }
+                }
+            }
+
+            if(boardFilled == 9)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

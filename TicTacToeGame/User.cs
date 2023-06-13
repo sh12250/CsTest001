@@ -8,7 +8,6 @@ namespace TicTacToeGame
 {
     public class User : Board
     {
-
         public void UserSelet(int xPos, int yPos) 
         {
             _yPos = yPos;

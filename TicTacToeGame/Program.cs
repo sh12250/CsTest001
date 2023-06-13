@@ -66,6 +66,10 @@ namespace TicTacToeGame
                     {
                         break;
                     }
+                    else if(gM.CheckBoardFull(board._gameBoard))
+                    {
+                        break;
+                    }
 
                     board.PrintTheBoard();
                     Console.WriteLine("상대의 차례입니다");
@@ -74,6 +78,10 @@ namespace TicTacToeGame
                     ai.Action(board._gameBoard);
 
                     if (gM.CheckAiWin(board._gameBoard))
+                    {
+                        break;
+                    }
+                    else if (gM.CheckBoardFull(board._gameBoard))
                     {
                         break;
                     }
@@ -92,6 +100,11 @@ namespace TicTacToeGame
                 {
                     board.PrintTheBoard();
                     Console.WriteLine("패배...");
+                }
+                else if (gM.CheckBoardFull(board._gameBoard))
+                {
+                    board.PrintTheBoard();
+                    Console.WriteLine("무승부");
                 }
 
                 Console.WriteLine("다음 게임을 하시겠습니까?");
@@ -112,6 +125,6 @@ namespace TicTacToeGame
                     break;
                 }
             }       // while()
-        }
-    }
+        }       // Main()
+    }       // class Program
 }
