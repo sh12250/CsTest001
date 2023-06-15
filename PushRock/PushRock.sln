@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PushRock", "PushRock.csproj", "{38872951-9CB1-4E09-A851-5AD1A69CC6DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{38872951-9CB1-4E09-A851-5AD1A69CC6DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38872951-9CB1-4E09-A851-5AD1A69CC6DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38872951-9CB1-4E09-A851-5AD1A69CC6DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38872951-9CB1-4E09-A851-5AD1A69CC6DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {59C31C99-1FF6-49C4-8424-0DAC2DB80E8B}
+	EndGlobalSection
+EndGlobal
