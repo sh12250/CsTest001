@@ -53,7 +53,21 @@ namespace PushRock
             {
                 for(int x=0; x < MapSize; x++)
                 {
-                    Console.Write(TheMap[y, x]);
+                    if(TheMap[y, x] == "◎")
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.Write(TheMap[y, x]);
+                    }
+                    else if(TheMap[y, x] == "□")
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.Write(TheMap[y, x]);
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write(TheMap[y, x]);
+                    }
                 }
                 Console.WriteLine();
             }

@@ -10,12 +10,15 @@ namespace PushRock
     {
         static void Main(string[] args)
         {
+            List<int> rockPositions = new List<int>();
             Cursor cursor = new Cursor();
             Player player = new Player();
             Map map = new Map();
 
             int rockCount = 0;
-            int score = 0;
+            int rockContact = 0;
+            int score = 0;            
+            string rockImage = "□";
 
             map.InitSize();
 
@@ -29,10 +32,6 @@ namespace PushRock
             cursor.InitCursorPosition(1, 1);
             cursor.MoveCursor();
 
-            Rock rock1 = new Rock();
-            Rock rock2 = new Rock();
-            Rock rock3 = new Rock();
-
             while (true)
             {
                 if(score == 10)
@@ -43,70 +42,181 @@ namespace PushRock
 
                 cursor.GetCursorPosition(map.MapSize - 1);
 
-                if (map.TheMap[cursor.yPosition,cursor.xPosition] != "□")
+                if(cursor.LastInput == 'r')
+                {
+                    map.MakeMap();
+                    player.InsertPlayer(map.TheMap, map.MapSize);
+
+                    map.TheMap[rockPositions[0], rockPositions[1]] = rockImage;
+                    map.TheMap[rockPositions[2], rockPositions[3]] = rockImage;
+                    map.TheMap[rockPositions[4], rockPositions[5]] = rockImage;
+                }
+
+                if (map.TheMap[cursor.yPosition,cursor.xPosition] != rockImage)
                 {
                     cursor.MoveCursor();
                     player.MovePlayer(map.TheMap, cursor.xPosition, cursor.yPosition);
                 }
-                else
+                else if(map.TheMap[cursor.yPosition, cursor.xPosition] == rockImage)
                 {
-                    if(cursor.xPosition == rock1.RockXPos && cursor.yPosition == rock1.RockYPos)
+                    if(cursor.LastInput == 'w')
                     {
-                        rock1.SlideRock(map.TheMap, map.MapSize);
+                        for (int y = cursor.yPosition - 1; y > 0; y--)
+                        {
+                            if(map.TheMap[y, cursor.xPosition] == rockImage || map.TheMap[y, cursor.xPosition] == "■")
+                            {
+                                break;
+                            }
+
+                            map.TheMap[y + 1, cursor.xPosition] = "　";
+                            map.TheMap[y, cursor.xPosition] = rockImage;
+                            cursor.MoveCursor(0, 0);
+                            map.PrintMap();
+                            Task.Delay(50).Wait();
+                        }
                     }
-                    else if(cursor.xPosition == rock2.RockXPos && cursor.yPosition == rock2.RockYPos)
+                    else if(cursor.LastInput == 'a')
                     {
-                        rock2.SlideRock(map.TheMap, map.MapSize);
+                        for (int x = cursor.xPosition - 1; x > 0; x--)
+                        {
+                            if (map.TheMap[cursor.yPosition, x] == rockImage || map.TheMap[cursor.yPosition, x] == "■")
+                            {
+                                break;
+                            }
+
+                            map.TheMap[cursor.yPosition, x + 1] = "　";
+                            map.TheMap[cursor.yPosition, x] = rockImage;
+                            cursor.MoveCursor(0, 0);
+                            map.PrintMap();
+                            Task.Delay(50).Wait();
+                        }
                     }
-                    else if(cursor.xPosition == rock3.RockXPos && cursor.yPosition == rock3.RockYPos)
+                    else if (cursor.LastInput == 's')
                     {
-                        rock3.SlideRock(map.TheMap, map.MapSize);
+                        for (int y = cursor.yPosition + 1; y < map.MapSize - 1; y++)
+                        {
+                            if (map.TheMap[y, cursor.xPosition] == rockImage || map.TheMap[y, cursor.xPosition] == "■")
+                            {
+                                break;
+                            }
+
+                            map.TheMap[y - 1, cursor.xPosition] = "　";
+                            map.TheMap[y, cursor.xPosition] = rockImage;
+                            cursor.MoveCursor(0, 0);
+                            map.PrintMap();
+                            Task.Delay(50).Wait();
+                        }
+                    }
+                    else if (cursor.LastInput == 'd')
+                    {
+                        for (int x = cursor.xPosition + 1; x < map.MapSize - 1; x++)
+                        {
+                            if (map.TheMap[cursor.yPosition, x] == rockImage || map.TheMap[cursor.yPosition, x] == "■")
+                            {
+                                break;
+                            }
+
+                            map.TheMap[cursor.yPosition, x - 1] = "　";
+                            map.TheMap[cursor.yPosition, x] = rockImage;
+                            cursor.MoveCursor(0, 0);
+                            map.PrintMap();
+                            Task.Delay(50).Wait();
+                        }
                     }
 
                     cursor.InitCursorPosition(player.PlayerXPos, player.PlayerYPos);
                 }
 
-
-                if (rockCount != 3)
+                if(rockCount == 0)
                 {
-                    rock1.GetRockPosition(map.TheMap, map.MapSize);
-                    rock1.PlaceRock(map.TheMap);
+                    Random random = new Random();
+                    int randIdxY;
+                    int randIdxX;
 
-                    rock2.GetRockPosition(map.TheMap, map.MapSize);
-                    rock2.PlaceRock(map.TheMap);
+                    for (int i = 0;  i < 3; i++)
+                    {
+                        randIdxY = random.Next(2, map.MapSize - 2);
+                        randIdxX = random.Next(2, map.MapSize - 2);
 
-                    rock3.GetRockPosition(map.TheMap, map.MapSize);
-                    rock3.PlaceRock(map.TheMap);
+                        while(map.TheMap[randIdxY, randIdxX] == rockImage || map.TheMap[randIdxY, randIdxX] == player.Character)
+                        {
+                            randIdxY = random.Next(2, map.MapSize - 2);
+                            randIdxX = random.Next(2, map.MapSize - 2);
+                        }
+
+                        map.TheMap[randIdxY, randIdxX] = rockImage;
+
+                        rockPositions.Add(randIdxY);
+                        rockPositions.Add(randIdxX);
+                    }
 
                     rockCount = 3;
+                    rockContact = 0;
                 }
 
-                if(rock1.IsTripleRock(map.TheMap))
+                for(int y = 1; y < map.MapSize - 1; y++)
                 {
-                    rock2.DeleteRock = rock1.IsTripleRock(map.TheMap);
-                    rock3.DeleteRock = rock1.IsTripleRock(map.TheMap);
-                    rock1.CrashRock(map.TheMap);
-                    rock2.CrashRock(map.TheMap);
-                    rock3.CrashRock(map.TheMap);
-                    score++;
+                    for(int x = 1; x < map.MapSize - 1; x++)
+                    {
+                        if (map.TheMap[y, x] == rockImage)
+                        {
+                            if (map.TheMap[y - 1, x] == rockImage)
+                            {
+                                rockContact++;
+                            }
+                            if (map.TheMap[y, x - 1] == rockImage)
+                            {
+                                rockContact++;
+                            }
+                            if (map.TheMap[y + 1, x] == rockImage)
+                            {
+                                rockContact++;
+                            }
+                            if (map.TheMap[y, x + 1] == rockImage)
+                            {
+                                rockContact++;
+                            }
+
+                            if(rockContact == 2)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                rockContact = 0;
+                            }
+                        }
+                    }
+
+                    if (rockContact == 2)
+                    {
+                        break;
+                    }
                 }
-                else if(rock2.IsTripleRock(map.TheMap))
+
+                if (rockContact == 2)
                 {
-                    rock1.DeleteRock = rock2.IsTripleRock(map.TheMap);
-                    rock3.DeleteRock = rock2.IsTripleRock(map.TheMap);
-                    rock1.CrashRock(map.TheMap);
-                    rock2.CrashRock(map.TheMap);
-                    rock3.CrashRock(map.TheMap);
-                    score++;
-                }
-                else if(rock3.IsTripleRock(map.TheMap))
-                {
-                    rock1.DeleteRock = rock3.IsTripleRock(map.TheMap);
-                    rock2.DeleteRock = rock3.IsTripleRock(map.TheMap);
-                    rock1.CrashRock(map.TheMap);
-                    rock2.CrashRock(map.TheMap);
-                    rock3.CrashRock(map.TheMap);
-                    score++;
+                    for (int y = 1; y < map.MapSize - 1; y++)
+                    {
+                        for (int x = 1; x < map.MapSize - 1; x++)
+                        {
+                            if (rockCount == 0)
+                            {
+                                break;
+                            }
+                            if (map.TheMap[y, x] == rockImage)
+                            {
+                                map.TheMap[y, x] = "　";
+                                rockCount--;
+                            }
+                        }
+                        if (rockCount == 0)
+                        {
+                            rockPositions.RemoveRange(0, 6);
+                            score++;
+                            break;
+                        }
+                    }
                 }
 
                 cursor.MoveCursor(0, 0);

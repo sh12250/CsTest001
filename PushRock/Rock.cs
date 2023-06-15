@@ -14,22 +14,10 @@ namespace PushRock
         public bool DeleteRock { get; set; }
 
 
-        public void GetRockPosition(string[,] theMap, int size)
+        public void GetRockPosition(int xPos, int yPos)
         {
-            Random random = new Random();
-
-            RockImage = "□";
-            RockXPos = random.Next(2, size - 2);
-            RockYPos = random.Next(2, size - 2);
-            DeleteRock = false;
-
-            while (theMap[RockYPos, RockXPos] == "◎" || theMap[RockYPos, RockXPos] == "□")
-            {
-                RockXPos = random.Next(1, size - 1);
-                RockYPos = random.Next(1, size - 1);
-            }
-
-            PlaceRock(theMap);
+            RockXPos = xPos;
+            RockYPos = yPos;
         }
 
         public void PlaceRock(string[,] theMap)
@@ -37,68 +25,34 @@ namespace PushRock
             theMap[RockYPos, RockXPos] = RockImage;
         }
 
-        public void SlideRock(string[,] theMap, int size)
+        public void SlideRock(string[,] theMap, int size, char direction)
         {
-            if (theMap[RockYPos - 1, RockXPos] == "◎")
+            switch (direction)
             {
-                while (theMap[RockYPos + 1, RockXPos] != "■" && theMap[RockYPos + 1, RockXPos] != RockImage)
-                {
-                    theMap[RockYPos, RockXPos] = theMap[RockYPos + 1, RockXPos];
-                    theMap[RockYPos + 1, RockXPos] = RockImage;
-                    RockYPos++;
-                }
-            }
-            else if (theMap[RockYPos, RockXPos - 1] == "◎")
-            {
-                while (theMap[RockYPos, RockXPos + 1] != "■" && theMap[RockYPos, RockXPos + 1] != RockImage) // "■"
-                {
-                    theMap[RockYPos, RockXPos] = theMap[RockYPos, RockXPos + 1];
-                    theMap[RockYPos, RockXPos + 1] = RockImage;
-                    RockXPos++;
-                }
-            }
-            else if (theMap[RockYPos + 1, RockXPos] == "◎")
-            {
-                while (theMap[RockYPos - 1, RockXPos] != "■" && theMap[RockYPos - 1, RockXPos] != RockImage)
-                {
-                    theMap[RockYPos, RockXPos] = theMap[RockYPos - 1, RockXPos];
-                    theMap[RockYPos - 1, RockXPos] = RockImage;
-                    RockYPos--;
-                }
-            }
-            else if (theMap[RockYPos, RockXPos + 1] == "◎")
-            {
-                while (theMap[RockYPos, RockXPos - 1] != "■" && theMap[RockYPos, RockXPos - 1] != RockImage)
-                {
-                    theMap[RockYPos, RockXPos] = theMap[RockYPos, RockXPos - 1];
-                    theMap[RockYPos, RockXPos - 1] = RockImage;
-                    RockXPos--;
-                }
-            }
-        }
-
-        public bool IsTripleRock(string[,] theMap)
-        {
-            if(theMap[RockXPos - 1, RockYPos] == RockImage && theMap[RockXPos + 1, RockYPos] == RockImage)
-            {
-                DeleteRock = true;
-                return DeleteRock;
-            }
-            else
-            if (theMap[RockXPos, RockYPos - 1] == RockImage && theMap[RockXPos, RockYPos + 1] == RockImage)
-            {
-                DeleteRock = true;
-                return DeleteRock;
-            }
-
-            return DeleteRock;
-        }
-
-        public void CrashRock(string[,] theMap)
-        {
-            if(DeleteRock == true)
-            {
-                theMap[RockXPos, RockYPos] = "　";
+                case 'w':
+                    if (RockYPos - 1 != 1)
+                    {
+                        RockYPos--;
+                    }
+                    break;
+                case 'a':
+                    if (RockXPos - 1 != 1)
+                    {
+                        RockXPos--;
+                    }
+                    break;
+                case 's':
+                    if (RockYPos + 1 != size - 1)
+                    {
+                        RockYPos++;
+                    }
+                    break;
+                case 'd':
+                    if (RockXPos + 1 != size - 1)
+                    {
+                        RockXPos++;
+                    }
+                    break;
             }
         }
     }

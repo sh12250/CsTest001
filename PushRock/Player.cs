@@ -8,7 +8,7 @@ namespace PushRock
 {
     public class Player
     {
-        private string Character { get; set; }
+        public string Character { get; private set; }
         public int PlayerXPos { get; private set; }
         public int PlayerYPos { get; private set; }
 
