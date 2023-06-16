@@ -42,7 +42,7 @@ namespace PushRock
 
                 cursor.GetCursorPosition(map.MapSize - 1);
 
-                if(cursor.LastInput == 'r')
+                if(cursor.LastInput == 'r' && rockCount != 0)
                 {
                     map.MakeMap();
                     player.InsertPlayer(map.TheMap, map.MapSize);
