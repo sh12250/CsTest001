@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenPoker", "SevenPoker.csproj", "{BE7277AD-F427-4362-A66C-E0A9FA867F44}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE7277AD-F427-4362-A66C-E0A9FA867F44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE7277AD-F427-4362-A66C-E0A9FA867F44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE7277AD-F427-4362-A66C-E0A9FA867F44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE7277AD-F427-4362-A66C-E0A9FA867F44}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {13E49EA9-4B4C-4F1A-A106-7DEAB822AF8E}
+	EndGlobalSection
+EndGlobal
