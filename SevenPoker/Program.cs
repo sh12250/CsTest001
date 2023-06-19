@@ -14,7 +14,7 @@ namespace SevenPoker
         {
             Cursor cursor = new Cursor();
 
-            char userInput = '0';
+            int userInput = 0;
 
             int dumpCard = 0;
 
@@ -31,138 +31,83 @@ namespace SevenPoker
                 Console.WriteLine();
 
                 myCard.PrintHand(deck.cardInfos);
+
+
                 while(true)
                 {
-                    if(dumpCard == 0)
+                    if (myCard.handSize == 3)
                     {
                         break;
                     }
-                    
+
                     cursor.MoveCursor(50, 20);
                     userInput = GetPlayerInput();
 
-                    dumpCard = (int)userInput;
-
-                    myCard.SetHandSize(myCard.handSize - dumpCard);
-
-                    switch (dumpCard)
+                    if(userInput == 0)
                     {
-                        case 1:
-                        cursor.MoveCursor(50, 20);
-                        userInput = GetPlayerInput();
-
-                            switch (userInput)
-                            {
-                            case '1':
-                                myCard.hand.Remove(myCard.hand[0]);
-                                dumpCard--;
-                                break;
-                            case '2':
-                                myCard.hand.Remove(myCard.hand[1]);
-                                dumpCard--;
-                                break;
-                            case '3':
-                                myCard.hand.Remove(myCard.hand[2]);
-                                dumpCard--;
-                                break;
-                            case '4':
-                                myCard.hand.Remove(myCard.hand[3]);
-                                dumpCard--;
-                                break;
-                            case '5':
-                                myCard.hand.Remove(myCard.hand[4]);
-                                dumpCard--;
-                                break;
-                            }
-
-                        cursor.MoveCursor(0, 2);
-                        myCard.PrintHand(deck.cardInfos);
-
-                        break;
-
-                        case 2:
-                        cursor.MoveCursor(50, 20);
-                        userInput = GetPlayerInput();
-
-                            switch (userInput)
-                            {
-                            case '1':
-                                myCard.hand.Remove(myCard.hand[0]);
-                                dumpCard--;
-                                break;
-                            case '2':
-                                myCard.hand.Remove(myCard.hand[1]);
-                                dumpCard--;
-                                break;
-                            case '3':
-                                myCard.hand.Remove(myCard.hand[2]);
-                                dumpCard--;
-                                break;
-                            case '4':
-                                myCard.hand.Remove(myCard.hand[3]);
-                                dumpCard--;
-                                break;
-                            case '5':
-                                myCard.hand.Remove(myCard.hand[4]);
-                                dumpCard--;
-                                break;
-                            }
-
-                        cursor.MoveCursor(0, 2);
-                        myCard.PrintHand(deck.cardInfos);
-
-                        cursor.MoveCursor(50, 20);
-                        userInput = GetPlayerInput();
-
-                            switch (userInput)
-                            {
-                            case '1':
-                                myCard.hand.Remove(myCard.hand[0]);
-                                dumpCard--;
-                                break;
-                            case '2':
-                                myCard.hand.Remove(myCard.hand[1]);
-                                dumpCard--;
-                                break;
-                            case '3':
-                                myCard.hand.Remove(myCard.hand[2]);
-                                dumpCard--;
-                                break;
-                            case '4':
-                                myCard.hand.Remove(myCard.hand[3]);
-                                dumpCard--;
-                                break;
-                            }
-
-                        cursor.MoveCursor(0, 2);
-                        myCard.PrintHand(deck.cardInfos);
-
                         break;
                     }
-                }       // while()
-            }
+
+                    if (userInput - 1 < myCard.handSize && userInput - 1 >= 0)
+                    {
+                        dumpCard++;
+
+                        myCard.SetHandSize(myCard.handSize - 1);
+                        myCard.hand.Remove(myCard.hand[userInput - 1]);
+
+                        Console.Clear();
+                        cursor.MoveCursor(0, 0);
+                        comCard.PrintHand(deck.cardInfos);
+                        Console.WriteLine();
+                        myCard.PrintHand(deck.cardInfos);
+                    }
+                }
+
+                if(dumpCard > 0)
+                {
+                    cursor.MoveCursor(0, 4);
+                    myCard.SetHandSize(myCard.handSize + dumpCard);
+                    myCard.Mulligan(myCard.hand, deck.serialNum, dumpCard);
+                    Console.ReadLine();
+
+                    dumpCard = 0;
+                }
+
+                Console.Clear();
+                cursor.MoveCursor(0, 0);
+                comCard.PrintHand(deck.cardInfos);
+                Console.WriteLine();
+                myCard.PrintHand(deck.cardInfos);
+                Console.ReadLine();
+
+
+
+
+
+
+
+
+            }       // while(true)
         }                                       // main()
 
-        static char GetPlayerInput()
+        static int GetPlayerInput()
         {
             ConsoleKeyInfo keyInfo = Console.ReadKey();
 
             switch (keyInfo.KeyChar)
             {
                 case '1':
-                    return keyInfo.KeyChar;
+                    return 1;
                 case '2':
-                    return keyInfo.KeyChar;
+                    return 2;
                 case '3':
-                    return keyInfo.KeyChar;
+                    return 3;
                 case '4':
-                    return keyInfo.KeyChar;
+                    return 4;
                 case '5':
-                    return keyInfo.KeyChar;
-                case 'e':
-                    return keyInfo.KeyChar;
+                    return 5;
                 default:
-                    return '0';
+                    return 0;
             }
         }
 

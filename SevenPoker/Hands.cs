@@ -8,8 +8,8 @@ namespace SevenPoker
 {
     public class Hands
     {
-        public List<int> hand { get; set; }
-        public int handSize { get; set; }
+        public List<int> hand { get; private set; }
+        public int handSize { get; private set; }
 
 
         public Hands(List<int> serialNum, int cards)
@@ -37,7 +37,7 @@ namespace SevenPoker
             Console.WriteLine();
         }
 
-        public void Mulligan(List<int> serialNum, int num)
+        public void Mulligan(List<int> hand_, List<int> serialNum, int num)
         {
             Random random = new Random();
             int randIdx = 0;
@@ -45,7 +45,7 @@ namespace SevenPoker
             for (int i = 0; i < num; i++)
             {
                 randIdx = random.Next(serialNum.Count);
-                hand.Add(randIdx);
+                hand_.Add(randIdx);
                 serialNum.Remove(randIdx);
             }
         }
