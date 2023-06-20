@@ -1,5 +1,4 @@
-﻿using MaybeRPG;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Policy;
@@ -13,6 +12,7 @@ namespace SevenPoker
         static void Main(string[] args)
         {
             Cursor cursor = new Cursor();
+            GradeHand grade = new GradeHand();
 
             int userInput = 0;
 
@@ -25,11 +25,12 @@ namespace SevenPoker
                 Hands myCard = new Hands(deck.serialNum, 5);
 
                 cursor.MoveCursor(0, 0);
-
-                comCard.PrintHand(deck.cardInfos);
-
+                Console.WriteLine("                                        ");
                 Console.WriteLine();
-
+                Console.WriteLine("                                        ");
+                cursor.MoveCursor(0, 0);
+                comCard.PrintHand(deck.cardInfos);
+                Console.WriteLine();
                 myCard.PrintHand(deck.cardInfos);
 
 
@@ -55,7 +56,10 @@ namespace SevenPoker
                         myCard.SetHandSize(myCard.handSize - 1);
                         myCard.hand.Remove(myCard.hand[userInput - 1]);
 
-                        Console.Clear();
+                        cursor.MoveCursor(0, 0);
+                        Console.WriteLine("                                        ");
+                        Console.WriteLine();
+                        Console.WriteLine("                                        ");
                         cursor.MoveCursor(0, 0);
                         comCard.PrintHand(deck.cardInfos);
                         Console.WriteLine();
@@ -67,21 +71,29 @@ namespace SevenPoker
                 {
                     cursor.MoveCursor(0, 4);
                     myCard.SetHandSize(myCard.handSize + dumpCard);
-                    myCard.Mulligan(myCard.hand, deck.serialNum, dumpCard);
+                    myCard.Mulligan(deck.serialNum, dumpCard);
                     Console.ReadLine();
 
                     dumpCard = 0;
                 }
 
-                Console.Clear();
+                cursor.MoveCursor(0, 0);
+                Console.WriteLine("                                        ");
+                Console.WriteLine();
+                Console.WriteLine("                                        ");
                 cursor.MoveCursor(0, 0);
                 comCard.PrintHand(deck.cardInfos);
                 Console.WriteLine();
                 myCard.PrintHand(deck.cardInfos);
+                cursor.MoveCursor(50, 20);
                 Console.ReadLine();
 
 
-
+                cursor.MoveCursor(0, 5);
+                grade.SetNumPatt(comCard.hand);
+                grade.TwoPair();
+                cursor.MoveCursor(50, 20);
+                Console.ReadLine();
 
 
 

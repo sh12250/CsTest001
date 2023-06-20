@@ -47,6 +47,7 @@
     <Compile Include="CardInfo.cs" />
     <Compile Include="Cursor.cs" />
     <Compile Include="Hands.cs" />
+    <Compile Include="GradeHand.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

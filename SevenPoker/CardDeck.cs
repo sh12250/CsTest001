@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SevenPoker
 {
     public class CardDeck
-    {
+    {   // 1~52 ,1~13 , 14~26 ,
         public List<int> serialNum {  get; private set; }
         public Dictionary<int, CardInfo> cardInfos { get; private set; }
 

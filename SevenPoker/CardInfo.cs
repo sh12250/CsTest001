@@ -35,19 +35,19 @@ namespace SevenPoker
 
             if(number / 13 == 0)
             {
-                cardPattern = "♠";
+                cardPattern = "♣";
             }
             else if(number / 13 == 1)
             {
-                cardPattern = "♡";
+                cardPattern = "◇";
             }
             else if (number / 13 == 2)
             {
-                cardPattern = "◇";
+                cardPattern = "♡";
             }
             else if (number / 13 == 3)
             {
-                cardPattern = "♣";
+                cardPattern = "♠";
             }
         }
     }
