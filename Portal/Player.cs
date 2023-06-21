@@ -15,9 +15,20 @@ namespace Portal
         public Player()
         {
             character = "◎";
+        }
 
-            pXPos = 7;  
-            pYPos = 10;
+        public void SetPlayerPosition(int yPos, int xPos)
+        {
+            pYPos = yPos;
+            pXPos = xPos;
+        }
+
+        public void SetPlayerPosition(int size)
+        {
+            Random random = new Random();
+
+            pYPos = random.Next(1, size - 1);
+            pXPos = random.Next(1, size - 1);
         }
 
         public void InsertPlayer(string[,] theMap)
@@ -31,6 +42,11 @@ namespace Portal
             theMap[yPos, xPos] = character;
             pXPos = xPos;
             pYPos = yPos;
+        }
+
+        public void RemovePlayer(string[,] theMap)
+        {
+            theMap[pYPos, pXPos] = "　";
         }
     }
 }

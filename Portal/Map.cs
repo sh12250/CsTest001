@@ -11,9 +11,9 @@ namespace Portal
         public string[,] theMap { get; private set; }
         public int mapSize { get; private set; }
 
-        public Map()
+        public Map(int size)
         {
-            InitSize();
+            mapSize = size + 2;
 
             string[,] map = new string[mapSize, mapSize];
 
@@ -57,7 +57,7 @@ namespace Portal
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.Write(theMap[y, x]);
                     }
-                    else if (theMap[y, x] == "▥")
+                    else if (theMap[y, x] == "♨")
                     {
                         Console.ForegroundColor = ConsoleColor.Blue;
                         Console.Write(theMap[y, x]);

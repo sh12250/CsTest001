@@ -12,7 +12,7 @@ namespace Portal
         public int cYPos { get; private set; }
         public char lastInput { get; private set; }
 
-        public void InitCursorPosition(int xPos, int yPos)
+        public void SetCursorPosition(int xPos, int yPos)
         {
             cXPos = xPos;
             cYPos = yPos;
