@@ -10,22 +10,11 @@ namespace CsharpTest
     {
         static void Main(string[] args)
         {
-            Cursor cursor = new Cursor();
+            RandomMap  myMap = new RandomMap();
 
-            Console.WriteLine("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-            Console.WriteLine("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-            Console.WriteLine("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-            Console.WriteLine("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-            Console.WriteLine("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+            Console.SetWindowSize(66, 40);
 
-            cursor.Init(12, 2);
-
-            while (true)
-            {
-                cursor.Input();
-                cursor.MoveCursor();
-                Console.WriteLine("a");
-            }
+            myMap.PrintTheMap();
         }
     }
 }
